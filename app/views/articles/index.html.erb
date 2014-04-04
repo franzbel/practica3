@@ -1,0 +1,50 @@
+<h1>LISTA DE ARTICULOS</h1>
+<table>  <!--crear una tabla -->
+  <thead> <!--cabecera de la tabla -->
+    <tr> <!-- para crear cada fila-->
+      <th>Titulo</th>  <!--esta celda es la cabecera de otras celdas-->
+      <th>Contenido</th>
+      <th>Fecha de publicacion</th>
+      <th></th>
+      <th> </th>
+      <th>Numero de comentarios</th>
+      <th>Numero de likes</th>
+      <th>Numero de palabras </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= link_to article.title, :action => 'show', :id => article.id %></td>  <!--columnas-->
+        <td><%= article.body %></td>
+        <td><%= article.published_at %></td>
+        <td><%= link_to 'Editar', :action => 'edit', :id => article.id %></td>
+		    <td><%= link_to 'Eliminar', {:action => :destroy, :id => article.id}, 
+									 :method => :delete, :data => { :confirm => 'Seguro?' } %></td>
+        <td><%= pluralize(article.comments.size, 'comentarios') %></td>  
+        <td><%= article.like %></td>  
+        <td><%= article.count_word %></td> 
+        <tr>
+            <td><%= button_to 'Me gusta', :action => 'like', :id => article.id %></td>
+            <td><%= button_to 'No me gusta', :action => 'like', :id => article.id %></td>  
+        </tr>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= form_tag articles_administrador_path, method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Busqueda", title: nil, bbody: nil, published_at: nil %>
+  </p>
+<% end %>
+
+<!--<%= link_to 'Articulo nuevo', {controller: 'articles', action: 'new'} %>-->
+
+
+
+
+

@@ -1,0 +1,16 @@
+<p>
+  <strong>Titulo:</strong>
+  <%= @article.title %>
+</p>
+
+<p>
+  <strong>Contenido:</strong>
+  <%= @article.body %>
+</p>
+
+<h2>Comentarios</h2>
+  <%= render @article.comments %>
+<h2>Añadir comentario:</h2>
+<%= render "comments/form" %>
+
+<%= link_to 'Atras', :action => :index %>

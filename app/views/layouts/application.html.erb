@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Proyecto</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="header">
+		<h1>MI BLOG</h1>
+		<div id="user_bar">
+      		<%= link_to "Nuevo articulo", new_article_path %> |
+      		<%= link_to "Pagina principal", root_path %>  |
+          <%= link_to "Acerca del autor", root_path %> 
+        </div>
+	</div>
+	<div>
+		<%= content_tag :p, notice, :class => 'notice' if notice.present? %>
+		<%= content_tag :p, alert, :class => 'alert' if alert.present? %>
+		<%= yield %>
+	</div>
+	<div id="footer">
+   		Mi blog para taller de programacion
+  	</div>
+</body>
+</html>
+
