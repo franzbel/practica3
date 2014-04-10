@@ -1,0 +1,81 @@
+<h1>Estoy en menu de admin</h1>
+
+<table>  <!--crear una tabla -->
+  <thead> <!--cabecera de la tabla -->
+    <tr> <!-- para crear cada fila-->
+      <th>Titulo</th>  <!--esta celda es la cabecera de otras celdas-->
+      <th>Contenido</th>
+      <th>Fecha de publicacion</th>
+      <th></th>
+      <th> </th>
+      <th>Numero de comentarios</th>
+      <th>Numero de likes</th>
+      <th>Numero de palabras </th>
+      <th>Categoria </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= link_to article.title, {:controller => 'articles', :action => 'show', :id => article.id} %></td>  <!--columnas-->
+        
+        <td><%= article.body %></td>
+        <td><%= article.published_at %></td>
+        <td><%= link_to 'Editar', {:controller => 'articles',:action => 'edit', :id => article.id} %></td>
+		<td><%= link_to 'Eliminar', {:controller => 'articles',:action => :destroy, :id => article.id}, 
+									 :method => :delete, :data => { :confirm => 'Seguro?' } %></td>
+        <td><%= pluralize(article.comments.size, 'comentarios') %></td>  
+        <td><%= article.like %></td>  
+        <td><%= article.count_word %></td> 
+        <td><%= article.category %></td> 
+        <tr>
+            <td><%= button_to 'Me gusta', {:controller => 'articles',:action => 'like', :id => article.id} %></td>
+            <td><%= button_to 'No me gusta', {:controller => 'articles',:action => 'dislike', :id => article.id} %></td>  
+        </tr>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<!--
+<form action="/admin/search_title" method="get">
+  Buscar por titulo:
+  <input type="text" name="title" value="" />
+  <br/>
+  <input type="submit" value="Buscar" />
+</form>
+
+
+<form action="/admin/search_word" method="get">
+  Buscar por palabra:
+  <input type="text" name="word" value="" />
+  <br/>
+  <input type="submit" value="Buscar" />
+</form>
+
+
+<form action="/admin/search_date" method="get">
+  Buscar por fecha:
+  <input type="text" name="date" value="" />
+  <br/>
+  <input type="submit" value="Buscar" />
+</form>
+
+
+<form action="/admin/search_doble_date" method="get">
+  Buscar desde:
+  <input type="text" name="date_ini" value="" />
+  <br/>
+  Buscar hasta:
+  <input type="text" name="date_fin" value="" />
+  <br/>
+  <input type="submit" value="Buscar" />
+</form>
+-->
+
+<form action="/admin/filtrar" method="get">
+  Articulos de la categoria:
+  <input type="text" name="category" value="" />
+  <br/>
+  <input type="submit" value="Buscar" />
+</form>

@@ -1,8 +1,12 @@
 class ArticlesController < ApplicationController
-	
-  def administrador
+  def dislike
+      @article = Article.find(params[:id])
+      var = @article.like
+      var = var>0 ? var - 1 : 0
+      @article.update_attributes(:like => var)
+      redirect_to :action => 'index'      
   end
- 
+
   def like
       @article = Article.find(params[:id])
       var = @article.like
@@ -48,7 +52,9 @@ class ArticlesController < ApplicationController
 		@article = Article.new(article_params)
 		@article.like = 0
     @article.count_word = @article.body.split.size
-		if @article.save 
+
+    if @article.save 
+
 			redirect_to :action => 'show', :id => @article.id
 		else
 			redirect_to :action=> :new
@@ -56,6 +62,6 @@ class ArticlesController < ApplicationController
 	end
 
 	def article_params
-      params.require(:article).permit(:title, :body, :published_at)
+      params.require(:article).permit(:title, :category, :body,:published_at)
     end
 end

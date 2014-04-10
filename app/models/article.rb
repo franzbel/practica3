@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
  
   belongs_to :user
   has_many :comments
- 
+  has_one :history_post
   def long_title
 	"#{title} - #{published_at}"
   end

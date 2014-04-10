@@ -1,0 +1,19 @@
+<h1>LISTA DE ARTICULOS DE UNA DETERMINADA FECHA</h1>
+<table>  <!--crear una tabla -->
+  <thead> <!--cabecera de la tabla -->
+    <tr> <!-- para crear cada fila-->
+      <th>Titulo</th>  <!--esta celda es la cabecera de otras celdas-->
+      <th>Contenido</th>
+      <th>Fecha de publicacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>  <!--columnas-->
+        <td><%= article.body %></td>
+        <td><%= article.published_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
